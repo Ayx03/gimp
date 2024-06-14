@@ -167,12 +167,12 @@
                                shadow-height
                                shadow-blur
                                shadow-blur)
-            (plug-in-gauss-rle RUN-NONINTERACTIVE
-                               image
-                               shadow-layer
-                               shadow-blur
-                               TRUE
-                               TRUE))))
+            (plug-in-gauss RUN-NONINTERACTIVE
+                           image
+                           shadow-layer
+                           (* 0.32 shadow-blur)
+                           (* 0.32 shadow-blur)
+                           1))))
 
     (if (= from-selection TRUE)
         (begin

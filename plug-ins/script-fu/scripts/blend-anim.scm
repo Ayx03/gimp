@@ -132,11 +132,12 @@
 							   blur
 							   blur)
 					(if (>= blur 1.0)
-						(plug-in-gauss-rle RUN-NONINTERACTIVE
+						(plug-in-gauss RUN-NONINTERACTIVE
 							   image
 							   upper-copy
-							   blur
-							   TRUE TRUE))
+							   (* 0.32 blur)
+                               (* 0.32 blur)
+                               1))
 					(set! blur (- max-blur blur))
 					(gimp-layer-set-lock-alpha lower-copy FALSE)
 					(set! layer-width (car (gimp-drawable-get-width
@@ -149,11 +150,12 @@
 							   blur
 							   blur)
 					(if (>= blur 1.0)
-						(plug-in-gauss-rle RUN-NONINTERACTIVE
+						(plug-in-gauss RUN-NONINTERACTIVE
 							   image
 							   lower-copy
-							   blur
-							   TRUE TRUE))))
+							   (* 0.32 blur)
+                               (* 0.32 blur)
+                               1))))
 				  (gimp-layer-resize bg-copy
 							 max-width
 							 max-height

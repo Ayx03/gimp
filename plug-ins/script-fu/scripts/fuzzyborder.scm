@@ -103,8 +103,8 @@
     (chris-color-edge theImage theLayer inColor 1)
 
     (if (= inBlur TRUE)
-        (plug-in-gauss-rle RUN-NONINTERACTIVE
-                           theImage theLayer inSize TRUE TRUE)
+        (plug-in-gauss RUN-NONINTERACTIVE
+                       theImage theLayer (* 0.32 inSize) (* 0.32 inSize) 1)
     )
     (if (= inShadow TRUE)
         (begin
@@ -120,12 +120,12 @@
                              theHeight
                              (/ inSize 2)
                              (/ inSize 2))
-          (plug-in-gauss-rle RUN-NONINTERACTIVE
-                             theImage
-                             theLayer
-                             (/ inSize 2)
-                             TRUE
-                             TRUE)
+          (plug-in-gauss RUN-NONINTERACTIVE
+                         theImage
+                         theLayer
+                         (* 0.32 (/ inSize 2))
+                         (* 0.32 (/ inSize 2))
+                         1)
           (gimp-layer-set-opacity theLayer inShadWeight)
         )
     )

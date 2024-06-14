@@ -31,8 +31,8 @@
     (gimp-layer-set-mode layer-two LAYER-MODE-MULTIPLY)
     (gimp-image-insert-layer img layer-two 0 0)
 
-    (plug-in-gauss-rle RUN-NONINTERACTIVE img layer-one bx TRUE FALSE)
-    (plug-in-gauss-rle RUN-NONINTERACTIVE img layer-two by FALSE TRUE)
+    (plug-in-gauss RUN-NONINTERACTIVE img layer-one (* 0.32 bx) 0 1)
+    (plug-in-gauss RUN-NONINTERACTIVE img layer-two 0 (* 0.32 by) 1)
     (gimp-image-flatten img)
     (set! bump-layer (aref (cadr (gimp-image-get-selected-layers img)) 0))
 
