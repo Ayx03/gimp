@@ -568,8 +568,6 @@ gimp-win-x86:
   stage: gimp
   script:
     - C:\msys64\usr\bin\bash -lc "bash build/windows/2_build-gimp-msys2.sh"
-    # We split 32-bit DWARF symbols here because LLVM-objcopy do NOT support them
-    - C:\msys64\usr\bin\bash -lc "bash build/windows/installer/3_dist-gimp-inno_sym.sh"
   artifacts:
     paths:
       - gimp-x86/
@@ -769,11 +767,8 @@ dist-installer-weekly:
   stage: distribution
   tags:
     - windows-aarch64
-  variables:
-    MSYSTEM: "CLANGARM64"
   cache: []
   script:
-    - C:\msys64\usr\bin\bash -lc "bash build/windows/installer/3_dist-gimp-inno_sym.sh"
     - build/windows/installer/3_dist-gimp-inno.ps1
   artifacts:
     expose_as: 'Windows exe'

@@ -7,6 +7,8 @@ else
   archsArray=('-x86')
 fi
 
+pacman --noconfirm -S --needed base-devel ${MINGW_PACKAGE_PREFIX}-binutils ${MINGW_PACKAGE_PREFIX}-llvm
+
 
 # (we extract and link DWARF .debug symbols to
 # make possible save space with Inno custom install)
@@ -20,10 +22,10 @@ for ARTIFACTS_SUFFIX in "${archsArray[@]}"; do
     if [ ! -f "$DIR/$NAME.debug" ]; then
       ## Split/extract DWARF symbols from binary to .debug
       echo "(INFO): extracting DWARF symbols from $NAME to $DIR"
-      objcopy --only-keep-debug $bin $debug
+      llvm-objcopy --only-keep-debug $bin $debug
 
       ## Link .debug to binary
-      objcopy --add-gnu-debuglink=$debug $bin --strip-unneeded
+      llvm-objcopy --add-gnu-debuglink=$debug $bin --strip-unneeded
 
       ## Move .debug files to .debug folder
       if [ ! -d "$DIR" ]; then
